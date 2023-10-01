@@ -138,7 +138,6 @@ int main(int argc, char *argv[]) {
     } else {
         check = 1;
     }
-
     if (check == 1) {
         printf("Invalid format string!!!");
     }
