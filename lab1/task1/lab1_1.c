@@ -52,11 +52,19 @@ int main(int argc, char *argv[]) {
     int check = 0;
 
     if (argc != 3) {
-        check = 1;
+        printf("Invalid format string!!!");
+        return 1;
+    }
+
+    char *endptr;
+    long long g = strtoll(argv[1], &endptr, 10);
+
+    if (*endptr != '\0' || g <= 0) {
+        printf("Invalid format string!!!");
+        return 1;
     }
 
     if (check == 0) {
-        long long g = atoll(argv[1]);
         
         if (argv[2][0] == '-' || argv[2][0] == '/') { 
 
@@ -129,18 +137,18 @@ int main(int argc, char *argv[]) {
                     break;
 
                 default:
-                    check = 1;
-                    break;
+                    printf("Invalid format string!!!");
+                    return 1;
             }
         } else {
-            check = 1;
+            printf("Invalid format string!!!");
+            return 1;
         } 
     } else {
-        check = 1;
-    }
-    if (check == 1) {
         printf("Invalid format string!!!");
+        return 1;
     }
+
 
     return 0;
 }
