@@ -36,14 +36,12 @@ int Fact(long long *n) {
     if (*n == 0 || *n == 1) {
         *n = 1;
     } else {
+        long long result = 1;
         long long max = *n;
         for (long long i = 2; i <= max; i++) { 
-            long long l = *n;
-            *n = *n * i;
-            if (l > *n) {
-                return 0;
-            }
+            result *= i;
         }
+        *n = result;
     }
     return 1;
 }
@@ -59,7 +57,7 @@ int main(int argc, char *argv[]) {
     char *endptr;
     long long g = strtoll(argv[1], &endptr, 10);
 
-    if (*endptr != '\0' || g <= 0) {
+    if (*endptr != '\0' || g < 0) {
         printf("Invalid format string!!!");
         return 1;
     }
@@ -111,7 +109,7 @@ int main(int argc, char *argv[]) {
                             long long base = i;
                             for (int j = 1; j <= g; j++) { 
                                 base *= i;
-                                printf("%lld ", (long long)base); 
+                                printf("%lld ", base); 
                             }
                             printf("\n");
                         }

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define EPS 1e-10
+#define EPS 1e-8
 
 double CalculateEBySeries(double eps) {
     double cur = 1.0, prev;
@@ -222,6 +222,7 @@ double CalculateGammaBySeries(double eps) {
 }
 
 int IsPrime(double num) {
+
     if (num <= 1) {
         return 0; 
     }
@@ -284,8 +285,11 @@ int main(int argc, char* argv[]) {
     char* endptr = NULL;
     double eps = strtod(argv[1], &endptr);
     
-    if (*endptr != '\0' || eps < EPS) {
-        printf("Invalid or too small value.\n");
+    if (*endptr != '\0') {
+        printf("Invalid value\n");
+        return 2;
+    } else if(eps < EPS){
+        printf("Too small value");
         return 2;
     }
 
