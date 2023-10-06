@@ -49,7 +49,7 @@ int sum_c(double x, double eps, double* res) {
 
 int sum_d(double x, double eps, double* res) {
     if (fabs(x) >= 1) {
-        return 1; // Вернуть ошибку, так как ряд расходится
+        return 1; 
     }
     long n = 0;
     double cur = x;
