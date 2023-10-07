@@ -33,6 +33,10 @@ int sum_b(double x, double eps, double* res) {
 }
 
 int sum_c(double x, double eps, double* res) {
+    if (fabs(x) >= 1) {
+        return 1; 
+    }
+
     long n = 0;
     double cur = 1;
     double sum = cur;
@@ -88,6 +92,11 @@ int main(int argc, char* argv[]) {
     double x = strtod(argv[1], NULL);
     double eps = strtod(argv[2], NULL);
 
+    if(eps == 0){
+        printf("Wrong epsilon");
+        return 2;
+    }
+
     double res_a;
     double res_b;
     double res_c;
@@ -108,6 +117,8 @@ int main(int argc, char* argv[]) {
 
     if (ans_c == 0) {
         printf("%.16lf\n", res_c);
+    } else {
+        printf("incorrect argument");
     }
 
     if (ans_d == 0) {
