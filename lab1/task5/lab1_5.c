@@ -69,20 +69,20 @@ int check_num_lf(char* slovo) {
     char* endptr = NULL;
     double slovo1 = strtod(slovo, &endptr);
     if (*endptr != '\0') {
-        return 1; // Некорректный ввод
+        return 1; 
     }
-    return 0; // Все в порядке
+    return 0; 
 }
 
 int main(int argc, char* argv[]) {
     if (argc != 3) {
         printf("Wrong argc");
-        return 1; // Неправильное количество аргументов командной строки
+        return 1; 
     }
 
     if (check_num_lf(argv[1]) == 1 || check_num_lf(argv[2]) == 1) {
         printf("Invalid input");
-        return 2; // Некорректный ввод числа или точности
+        return 2; 
     }
 
     double x = strtod(argv[1], NULL);
