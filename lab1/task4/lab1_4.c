@@ -126,6 +126,10 @@ int main(int argc, char* argv[]) {
         flag = argv[1][1];
         size_t len = strlen(argv[2]);
         char* output_name = (char*)malloc(len + 5);
+        if(output_name == NULL){
+            printf("Wrong answer");
+            return 1;
+        }
         make_output_name(output_name, argv[2]);
         file_output = fopen(output_name, "w");
         free(output_name);

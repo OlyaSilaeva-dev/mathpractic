@@ -22,7 +22,7 @@ void process_file_r(const char *output_file, const char *file1, const char *file
 
     if (f1 == NULL || f2 == NULL || out == NULL) {
         perror("File Opening error");
-        exit(1);
+        return;
     }
 
     int n1, n2;
@@ -52,7 +52,7 @@ void process_file_a(const char *output_file, const char *input_file) {
 
     if (input == NULL || out == NULL) {
         perror("File Opening error");
-        exit(1);
+        return;
     }
 
     int t;
@@ -88,7 +88,7 @@ void process_file_a(const char *output_file, const char *input_file) {
 int main(int argc, char *argv[]) {
     if (argc < 4) {
         fprintf(stderr, "Wrong argc\n");
-        exit(1);
+        return 0;
     }
 
     char *flag = argv[1];
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
     if (strcmp(flag, "-r") == 0) {
         if (argc < 5) {
             fprintf(stderr, "Mistake: the output file for the flag -r is not specified\n");
-            exit(1);
+            return 0;
         }
 
         char *output_file = argv[4];
@@ -106,14 +106,14 @@ int main(int argc, char *argv[]) {
     } else if (strcmp(flag, "-a") == 0) {
         if (argc < 4) {
             fprintf(stderr, "Mistake: the output file for the flag -a is not specified\n");
-            exit(1);
+            return 0;
         }
 
         char *output_file = argv[argc - 1];
         process_file_a(output_file, file1);
     } else {
         fprintf(stderr, "Unknown flag: %s\n", flag);
-        exit(1);
+        return 0;
     }
 
     return 0;

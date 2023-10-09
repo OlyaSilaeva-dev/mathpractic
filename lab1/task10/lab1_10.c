@@ -3,20 +3,30 @@
 #include <string.h>
 #include <ctype.h>
 
-long long int parseNumber(char* str, int base) {
+int parseNumber(char* str, int base, long long int* number) {
     long long int result = 0;
     int len = strlen(str);
     for (int i = 0; i < len; i++) {
         char c = str[i];
-        int digit;
+        long long int digit;
+
         if (isdigit(c)) {
             digit = c - '0';
-        } else {
+        } else if(isalpha(c)) {
             digit = 10 + (tolower(c) - 'a');
+        } else {
+            return 1;
         }
+
+        if(digit >= base){
+            return 2;
+        }
+
         result = result * base + digit;
     }
-    return result;
+
+    *number = result;
+    return 0;
 }
 
 void toBase(long long int number, int base) {
@@ -58,7 +68,6 @@ int main() {
     int base;
     char *input;
 
-    printf("Введите основание системы счисления (от 2 до 36): ");
     input = inputString(stdin, 10);
     if (input == NULL) {
         printf("Wrong base\n");
@@ -72,17 +81,29 @@ int main() {
     }
     
     long long int maxNumber = 0;
-    char maxNumberStr[50];
+    char maxNumberStr[100];
 
-    printf("Введите число (или 'Stop' для завершения ввода):\n");
+    if((input = inputString(stdin, 10)) != NULL && strcmp(input, "Stop") == 0){
+        printf("input is empty");
+        return 4;
+    }
 
-    while ((input = inputString(stdin, 10)) != NULL) {
+    do {
         if (strcmp(input, "Stop") == 0) {
             free(input);
             break;
         }
 
-        long long int number = parseNumber(input, base);
+        long long int number;
+        int answer = parseNumber(input, base, &number);
+
+        if (answer == 1){
+            printf("Invalid character in input");
+            return 2;
+        } else if (answer == 2){
+            printf("Digit not allowed in base");
+            return 3;
+        }
 
         if (llabs(number) > llabs(maxNumber)) {
             maxNumber = number;
@@ -90,16 +111,16 @@ int main() {
         }
 
         free(input);
-    }
+    } while ((input = inputString(stdin, 10)) != NULL); 
 
-    printf("Максимальное по модулю число: %lld\n", maxNumber);
-    printf("В системе счисления с основанием 9: ");
+    printf("%lld\n", maxNumber);
+    printf("9: ");
     toBase(maxNumber, 9);
-    printf("В системе счисления с основанием 18: ");
+    printf("18: ");
     toBase(maxNumber, 18);
-    printf("В системе счисления с основанием 27: ");
+    printf("27: ");
     toBase(maxNumber, 27);
-    printf("В системе счисления с основанием 36: ");
+    printf("36: ");
     toBase(maxNumber, 36);
 
     return 0;
