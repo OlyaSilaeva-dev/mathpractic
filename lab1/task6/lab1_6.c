@@ -75,10 +75,16 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    double eps = atof(argv[1]);
+    char* endptr;
+    double eps = strtod(argv[1], &endptr);
+    if(*endptr != '\0'){
+        printf("Invalid input");
+        return 2;
+    }
+    
     if(eps < MIN_EPS){
         printf("Too small value");
-        return 2;
+        return 3;
     }
 
     double res_a;

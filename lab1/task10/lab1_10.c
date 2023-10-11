@@ -49,6 +49,7 @@ void toBase(long long int number, int base) {
 
 char *inputString(FILE* fp, size_t size){
     char *str;
+    char* tmp;
     int ch;
     size_t len = 0;
     str = realloc(NULL, sizeof(*str) * size); 
@@ -56,8 +57,11 @@ char *inputString(FILE* fp, size_t size){
     while (EOF != (ch = fgetc(fp)) && ch != '\n') {
         str[len++] = ch;
         if (len == size) {
-            str = realloc(str, sizeof(*str) * (size += 16));
-            if (!str) return str;
+            tmp = realloc(str, sizeof(*str) * (size += 16));
+            if (tmp != NULL) {
+            str = tmp;
+            return str;
+            }
         }
     }
     str[len++] = '\0';

@@ -67,7 +67,7 @@ int checkInt(char *n, int *res) {
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        printf("Usage: program_name a b\n");
+        printf("Wrong argc\n");
         return 1;
     }
 
@@ -117,10 +117,10 @@ int main(int argc, char *argv[]) {
     }
 
     
-    for (int i = 0; i < sizeA; i++) {
-        printf("%d ", A[i]);
-    }
-    printf("\n");
+    // for (int i = 0; i < sizeA; i++) {
+    //     printf("%d ", A[i]);
+    // }
+    // printf("\n");
 
     for (int i = 0; i < sizeA; i++) {
         printf("%d ", C[i]);
